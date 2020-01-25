@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use Shanmuga\LaravelEntrust\Models\EntrustPermission;
+
+class DummyClass extends EntrustPermission
+{
+    //
+}
