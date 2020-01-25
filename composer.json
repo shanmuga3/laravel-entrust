@@ -28,5 +28,5 @@
                 "Shanmuga\\LaravelEntrust\\LaravelEntrustServiceProvider"
             ]
         }
-    },
+    }
 }
