@@ -7,7 +7,7 @@ return [
             'admin' => 'c,r,u,d',
             'profile' => 'r,d'
         ],
-        'sub_admin' => [
+        'subadmin' => [
             'users' => 'c,r,u',
             'profile' => 'r,u'
         ],

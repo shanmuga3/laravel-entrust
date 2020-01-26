@@ -1,7 +1,7 @@
 {
     "name": "shanmuga/laravel-entrust",
     "description": "This package provides a flexible solution to add ACL to Laravel",
-    "keywords": ["acl", "authorization", "php", "laravel","entrust", "roles", "permissions"],
+    "keywords": ["acl", "authorization", "php", "laravel","entrust", "roles", "permissions", "laravel-entrust"],
     "license": "MIT",
     "authors": [
         {
