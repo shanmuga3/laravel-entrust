@@ -25,6 +25,17 @@ class LaravelEntrustServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * The middlewares to be registered.
+     *
+     * @var array
+     */
+    protected $middlewares = [
+        'role'          => \Shanmuga\LaravelEntrust\Middleware\LaravelEntrustRole::class,
+        'permission'    => \Shanmuga\LaravelEntrust\Middleware\LaravelEntrustPermission::class,
+        'ability'       => \Shanmuga\LaravelEntrust\Middleware\LaravelEntrustAbility::class,
+    ];
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -40,7 +51,11 @@ class LaravelEntrustServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
 
-        $this->registerBladeDirectives();
+        if (class_exists('\Blade')) {
+            $this->registerBladeDirectives();
+        }
+
+        $this->registerMiddlewares();
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -66,6 +81,12 @@ class LaravelEntrustServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/config/entrust_seeder.php', 'entrust_seeder'
         );
+
+        $this->app->bind('laravel_entrust', function ($app) {
+            return new LaravelEntrust($app);
+        });
+
+        $this->app->alias('LaravelEntrust', 'Shanmuga\LaravelEntrust\Facades\LaravelEntrustFacade');
     }
 
     /**
@@ -75,10 +96,6 @@ class LaravelEntrustServiceProvider extends ServiceProvider
      */
     protected function registerBladeDirectives()
     {
-        if (!class_exists('\Blade')) {
-            return;
-        }
-
         // Call to LaravelEntrust::hasRole
         Blade::directive('role', function($expression) {
             return "<?php if (\\LaravelEntrust::hasRole({$expression})) : ?>";
@@ -105,5 +122,33 @@ class LaravelEntrustServiceProvider extends ServiceProvider
         Blade::directive('endability', function($expression) {
             return "<?php endif; // LaravelEntrust::ability ?>";
         });
+    }
+
+    /**
+     * Register the middlewares automatically.
+     *
+     * @return void
+     */
+    protected function registerMiddlewares()
+    {
+        if (!$this->app['config']->get('entrust.middleware.register')) {
+            return;
+        }
+
+        $router = $this->app['router'];
+
+        if (method_exists($router, 'middleware')) {
+            $registerMethod = 'middleware';
+        }
+        else if (method_exists($router, 'aliasMiddleware')) {
+            $registerMethod = 'aliasMiddleware';
+        }
+        else {
+            return;
+        }
+
+        foreach ($this->middlewares as $key => $class) {
+            $router->$registerMethod($key, $class);
+        }
     }
 }

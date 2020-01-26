@@ -12,24 +12,20 @@
 
 namespace Shanmuga\LaravelEntrust\Middleware;
 
-class LaravelEntrustRole extends LaravelEntrustMiddleware
+class LaravelEntrustPermission extends LaravelEntrustMiddleware
 {
     /**
      * Handle incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  Closure $next
-     * @param  string  $roles
+     * @param  string  $permissions
      * @param  mixed  $options
      * @return mixed
      */
-    public function handle($request, \Closure $next, $roles, ...$options)
+    public function handle($request, \Closure $next, $permissions, ...$options)
     {
-        if (!is_array($roles)) {
-            $roles = explode(self::DELIMITER, $roles);
-        }
-
-        if (!$this->authorization('roles', $roles,$options)) {
+        if (!$this->authorization('permissions', $permissions,$options)) {
             return $this->unauthorized();
         }
 

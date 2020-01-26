@@ -6,7 +6,7 @@
  *
  * @license     MIT
  * @package     Shanmuga\LaravelEntrust
- * @category    Models
+ * @category    Middleware
  * @author      Shanmugarajan
  */
 
@@ -14,7 +14,7 @@ namespace Shanmuga\LaravelEntrust\Middleware;
 
 use Illuminate\Support\Facades\Auth;
 
-class LaravelEntrustAbility extends LaratrustMiddleware
+class LaravelEntrustAbility extends LaravelEntrustMiddleware
 {
     /**
      * Handle an incoming request.

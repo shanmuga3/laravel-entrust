@@ -6,7 +6,7 @@
  *
  * @license     MIT
  * @package     Shanmuga\LaravelEntrust
- * @category    Models
+ * @category    Middleware
  * @author      Shanmugarajan
  */
 
@@ -27,10 +27,13 @@ class LaravelEntrustMiddleware
      *
      * @param  string $type
      * @param  string $rolesPermissions
+     * @param  string $options|null
      * @return boolean
      */
-    protected function authorization($type, $rolesPermissions)
+    protected function authorization($type, $rolesPermissions, $options = null)
     {
+        $guard = isset($options[0]) ? $options[0] : Config::get('entrust.defaults.guard');
+
         $method = $type == 'roles' ? 'hasRole' : 'hasPermission';
 
         if (!is_array($rolesPermissions)) {

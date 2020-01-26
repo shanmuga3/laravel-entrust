@@ -63,6 +63,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Laravel Entrust Default Configurations
+    |--------------------------------------------------------------------------
+    |
+    | These Configurations are used by Laravel Entrust to define the defaults
+    | If you want the Laravel Entrust to be in a different guards you can do it here.
+    |
+    */
+    'defaults' => [
+        'guard'          => 'web',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Laravel Entrust Tables
     |--------------------------------------------------------------------------
     |

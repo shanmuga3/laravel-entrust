@@ -139,20 +139,19 @@ trait LaravelEntrustUserTrait
         return false;
     }
 
-
     /**
      * Check if user has a permission by its name.
      *
-     * @param string|array $permission Permission string or array of permissions.
-     * @param bool         $requireAll All permissions in the array are required.
-     *
+     * @param  string|array  $permission  Permission string or array of permissions.
+     * @param  bool  $requireAll  All permissions in the array are required.
      * @return bool
      */
-    public function can($permission, $requireAll = false)
+    public function hasPermission($permission, $requireAll = false)
     {
+        $permission = $this->standardize($permission);
         if (is_array($permission)) {
             foreach ($permission as $permName) {
-                $hasPerm = $this->can($permName);
+                $hasPerm = $this->hasPermission($permName);
 
                 if ($hasPerm && !$requireAll) {
                     return true;
@@ -171,7 +170,7 @@ trait LaravelEntrustUserTrait
             foreach ($this->cachedRoles() as $role) {
                 // Validate against the Permission table
                 foreach ($role->cachedPermissions() as $perm) {
-                    if (str_is( $permission, $perm->name) ) {
+                    if (Str::is( $permission, $perm->name) ) {
                         return true;
                     }
                 }
@@ -179,6 +178,19 @@ trait LaravelEntrustUserTrait
         }
 
         return false;
+    }
+
+    /**
+     * Check if user has a permission by its name.
+     *
+     * @param string|array $permission Permission string or array of permissions.
+     * @param bool         $requireAll All permissions in the array are required.
+     *
+     * @return bool
+     */
+    public function can($permission, $requireAll = false)
+    {
+        return $this->hasPermission($permission, $requireAll);
     }
 
     /**
@@ -367,5 +379,19 @@ trait LaravelEntrustUserTrait
         return $query->whereHas('roles', function ($query) use ($role) {
             $query->where('name', $role);
         });
+    }
+
+    /**
+     * Checks if the string passed contains a pipe '|' and explodes the string to an array.
+     * @param  string|array  $value
+     * @return string|array
+     */
+    public function standardize($value, $toArray = false)
+    {
+        if (is_array($value) || ((strpos($value, '|') === false) && !$toArray)) {
+            return $value;
+        }
+
+        return explode('|', $value);
     }
 }

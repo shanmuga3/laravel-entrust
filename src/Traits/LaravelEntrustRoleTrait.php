@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Config;
 
 trait LaravelEntrustRoleTrait
 {
-    protected function cachedPermissions()
+    public function cachedPermissions()
     {
         $rolePrimaryKey = $this->primaryKey;
         $cacheKey = 'entrust_permissions_for_role_' . $this->$rolePrimaryKey;

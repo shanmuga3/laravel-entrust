@@ -23,6 +23,6 @@ class LaravelEntrustFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'entrust';
+        return 'laravel_entrust';
     }
 }
