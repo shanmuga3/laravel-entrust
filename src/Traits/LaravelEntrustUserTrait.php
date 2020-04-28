@@ -327,7 +327,7 @@ trait LaravelEntrustUserTrait
     public function attachRoles($roles = [])
     {
         foreach ($roles as $role) {
-            $this->attachRole($role, $team);
+            $this->attachRole($role);
         }
 
         return $this;
@@ -346,9 +346,22 @@ trait LaravelEntrustUserTrait
         }
 
         foreach ($roles as $role) {
-            $this->detachRole($role, $team);
+            $this->detachRole($role);
         }
 
+        return $this;
+    }
+
+    /**
+     * Sync All roles to a user.
+     *
+     * @param  mixed  $roles
+     * @return static
+     */
+    public function syncRoles()
+    {
+        $this->flushCache();
+        
         return $this;
     }
 
