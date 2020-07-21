@@ -161,7 +161,12 @@ trait LaravelEntrustRoleTrait
      */
     public function attachPermission($permission)
     {
-        $permission = $permission->getKey();
+        if(is_string($permission)) {
+            $permission = intval($permission);
+        }
+        else {
+            $permission = $permission->getKey();
+        }
 
         $this->permissions()->attach($permission);
         $this->flushCache();
