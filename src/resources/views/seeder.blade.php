@@ -1,5 +1,6 @@
 <?php echo '<?php' ?>
 
+namespace Database\Seeders;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Seeder;

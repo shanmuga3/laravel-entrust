@@ -91,6 +91,6 @@ class MakeSeederCommand extends Command
      */
     private function seederPath()
     {
-        return database_path("seeds/LaravelEntrustSeeder.php");
+        return database_path("seeders/LaravelEntrustSeeder.php");
     }
 }
