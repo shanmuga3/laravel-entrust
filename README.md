@@ -1,6 +1,8 @@
 # Laravel Entrust (Laravel 5, 6, 7 and 8 Package)
 Handle Role-based Permissions for your Laravel application.
 
+> **Note:** You Must Use version 1.x If you are using below Laravel 8.
+
 ## Contents
 
 - [Installation & Configuration](#installation)
@@ -49,14 +51,14 @@ Name of the migration file to be generated
 ```
 Model and Table Used for Authorization
 ```php
-'user_model' => 'App\User',
+'user_model' => 'App\Models\User',
 'user_table' => 'users',
 ```
 Name of the Models Used for Role and Permission
 ```php
 'models' => [
-    'role'          => 'App\Role',
-    'permission'    => 'App\Permission',
+    'role'          => 'App\Models\Role',
+    'permission'    => 'App\Models\Permission',
 ],
 ```
 Default Guard to perform user authentication, You Can also pass it manually when checking it.
@@ -303,8 +305,8 @@ If your app uses a custom namespace then you'll need to tell entrust where your 
 
 ```
 'models' => [
-     'role'          => 'App\Role',
-     'permission'    => 'App\Permission',
+     'role'          => 'App\Models\Role',
+     'permission'    => 'App\Models\Permission',
  ]
  ```
 ## License
