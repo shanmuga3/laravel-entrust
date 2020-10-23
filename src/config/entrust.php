@@ -32,7 +32,7 @@ return [
     | to have a different name, you can do it here.
     |
     */
-    'user_model' => 'App\User',
+    'user_model' => 'App\Models\User',
 
     /*
     |--------------------------------------------------------------------------
@@ -57,8 +57,8 @@ return [
     |
     */
     'models' => [
-        'role'          => 'App\Role',
-        'permission'    => 'App\Permission',
+        'role'          => 'App\Models\Role',
+        'permission'    => 'App\Models\Permission',
     ],
 
     /*
