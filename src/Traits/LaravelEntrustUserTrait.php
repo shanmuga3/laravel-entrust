@@ -24,7 +24,7 @@ trait LaravelEntrustUserTrait
     {
         $userPrimaryKey = $this->primaryKey;
         $cacheKey = 'entrust_roles_for_user_'.$this->$userPrimaryKey;
-        if(Cache::getStore() instanceof TaggableStore) {
+        if(Cache::getStore() instanceof \Illuminate\Cache\TaggableStore) {
             return Cache::tags(Config::get('entrust.tables.role_user'))->remember($cacheKey, Config::get('cache.ttl', 60), function () {
                 return $this->roles()->get();
             });
@@ -39,7 +39,7 @@ trait LaravelEntrustUserTrait
      */
     protected function flushCache()
     {
-        if (Cache::getStore() instanceof TaggableStore) {
+        if (Cache::getStore() instanceof \Illuminate\Cache\TaggableStore) {
             Cache::tags(Config::get('entrust.tables.role_user'))->flush();
         }
         return $this;
