@@ -1,4 +1,4 @@
-# Laravel Entrust (Laravel 5, 6, 7 and 8 Package)
+# Laravel Entrust (Laravel 5, 6 and 7 Package)
 Handle Role-based Permissions for your Laravel application.
 
 ## Contents

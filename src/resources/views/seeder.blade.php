@@ -44,8 +44,8 @@ class LaravelEntrustSeeder extends Seeder
 
                     $permissions[] = \{{ $permission }}::firstOrCreate([
                         'name' => $permissionValue . '-' . $module,
-                        'display_name' => ucfirst($permissionValue) . ' ' . ucfirst($module),
-                        'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
+                        'display_name' => ucfirst($permissionValue) . ' ' . ucwords(str_replace('_', ' ', $module)),
+                        'description' => ucfirst($permissionValue) . ' ' . ucwords(str_replace('_', ' ', $module)),
                     ])->id;
 
                     $this->command->info('Creating Permission to '.$permissionValue.' for '. $module);
