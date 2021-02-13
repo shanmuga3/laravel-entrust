@@ -40,8 +40,30 @@ class LaravelEntrustMiddleware
             $rolesPermissions = explode(self::DELIMITER, $rolesPermissions);
         }
 
-        return !Auth::guard($guard)->guest()
-            && Auth::guard($guard)->user()->$method($rolesPermissions);
+        // Uses multiple guards
+        if (is_array($guard)) {
+            $isAuthorized = false;
+
+            foreach ($guard as $one) {
+                $isAuthorized =
+                    !Auth::guard($one)->guest() &&
+                    Auth::guard($one)
+                        ->user()
+                        ->$method($rolesPermissions);
+
+                // Prevents the next one to invalidate the authorization
+                if ($isAuthorized) {
+                    return $isAuthorized;
+                }
+            }
+
+            return $isAuthorized;
+        } else {
+            return !Auth::guard($guard)->guest() &&
+                Auth::guard($guard)
+                    ->user()
+                    ->$method($rolesPermissions);
+        }
     }
 
     /**
