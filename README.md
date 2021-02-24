@@ -67,6 +67,12 @@ Default Guard to perform user authentication, You Can also pass it manually when
      'guard'          => 'web',
  ],
 ```
+You can also use multiple guards: 
+```php
+'defaults' => [
+     'guard'          => ['web', 'api'],
+ ],
+```
 Table names used for roles and permissions
 ```php
 'tables' => [
