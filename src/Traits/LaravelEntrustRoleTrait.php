@@ -12,6 +12,7 @@
 
 namespace Shanmuga\LaravelEntrust\Traits;
 
+use Illuminate\Cache\TaggableStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
