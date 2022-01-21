@@ -1,7 +1,9 @@
-# Laravel Entrust (Laravel 5, 6, 7 and 8 Package)
+# Laravel Entrust (Laravel 5, 6, 7, 8 and 9 Package)
 Handle Role-based Permissions for your Laravel application.
 
 > **Note:** You Must Use version 1.x If you are using below Laravel 8.
+
+> **Note:** You Must Use version 2.x If you are using below Laravel 9.
 
 ## Contents
 
@@ -276,8 +278,8 @@ The third parameter `validateAll` is a boolean flag to set whether to check all 
 You can use a middleware to filter routes and route groups by permission or role
 ```php
 Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
-    Route::get('/', 'AdminController@welcome');
-    Route::get('/view', 'AdminController@manageAdmins')->middleware('permission:view-admin');
+    Route::get('/', [AdminController::class,'welcome']);
+    Route::get('/view', [AdminController::class,'manageAdmins'])->middleware('permission:view-admin');
 });
 ```
 
