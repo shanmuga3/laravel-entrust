@@ -138,4 +138,9 @@ class LaravelEntrust
     {
         return $this->app->auth->user();
     }
+    
+     public function test_user()
+    {
+        return $this->app->auth->user();
+    }
 }
