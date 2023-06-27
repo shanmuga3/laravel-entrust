@@ -101,6 +101,14 @@ class LaravelEntrustServiceProvider extends ServiceProvider
             return "<?php if (\\LaravelEntrust::hasRole({$expression})) : ?>";
         });
 
+        Blade::directive('elseifrole', function($expression) {
+            return "<?php elseif (\\LaravelEntrust::hasRole({$expression})) : ?>";
+        });
+
+        Blade::directive('elserole', function() {
+            return "<?php else: ?>";
+        });
+
         Blade::directive('endrole', function($expression) {
             return "<?php endif; // LaravelEntrust::hasRole ?>";
         });
@@ -108,6 +116,14 @@ class LaravelEntrustServiceProvider extends ServiceProvider
         // Call to LaravelEntrust::can
         Blade::directive('permission', function($expression) {
             return "<?php if (\\LaravelEntrust::can({$expression})) : ?>";
+        });
+
+        Blade::directive('elseifpermission', function($expression) {
+            return "<?php elseif (\\LaravelEntrust::can({$expression})) : ?>";
+        });
+
+        Blade::directive('elsepermission', function() {
+            return "<?php else: ?>";
         });
 
         Blade::directive('endpermission', function($expression) {
