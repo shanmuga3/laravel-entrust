@@ -374,11 +374,11 @@ trait LaravelEntrustUserTrait
     {
         $roles = $this->roles()->with('permissions')->get();
 
-        $roles = $roles->flatMap(function ($role) {
+        $permissions = $roles->flatMap(function ($role) {
             return $role->permissions;
         });
 
-        return $this->permissions()->get()->merge($roles)->unique('name');
+        return $permissions->unique('name');
     }
 
     /**
