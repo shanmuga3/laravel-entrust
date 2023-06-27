@@ -1,9 +1,14 @@
-# Laravel Entrust (Laravel 5, 6, 7, 8 and 9 Package)
+# Laravel Entrust (Supports Laravel 5 to 10)
 Handle Role-based Permissions for your Laravel application.
 
-> **Note:** You Must Use version 1.x If you are using below Laravel 8.
+## Version Compatibility
 
-> **Note:** You Must Use version 2.x If you are using below Laravel 9.
+| Laravel       | Laravel Entrust                                           |
+| :------------ | :-------------------------------------------------- |
+| 10.x          | [4.x]         |
+| 9.x           | [3.x]         |
+| 8.x           | [2.x]         |
+| 7.x - 5.x     | [1.x]         |
 
 ## Contents
 
