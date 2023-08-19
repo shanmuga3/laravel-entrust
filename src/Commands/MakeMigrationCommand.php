@@ -161,7 +161,7 @@ class MakeMigrationCommand extends Command
 
         $migrationSuffix = $this->getMigrationSuffix();
 
-        return database_path("migrations/${date}_{$migrationSuffix}.php");
+        return database_path("migrations/{$date}_{$migrationSuffix}.php");
     }
 
     /**
